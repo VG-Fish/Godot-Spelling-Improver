@@ -1,0 +1,136 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd8i18tjcwntm"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_brmdg"]
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="2_ju1ob"]
+
+[sub_resource type="Theme" id="Theme_l6jmc"]
+
+[sub_resource type="Theme" id="Theme_ruyr5"]
+
+[sub_resource type="SystemFont" id="SystemFont_ccxhw"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_brmdg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_ju1ob")
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -113.0
+offset_bottom = 42.0
+grow_horizontal = 0
+theme = SubResource("Theme_l6jmc")
+theme_override_font_sizes/font_size = 30
+text = "Score: 0
+Words Attempted: 0
+Success Rate: 0%"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.7
+offset_left = -83.0
+offset_top = -64.0
+offset_right = 83.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Current Word" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ruyr5")
+theme_override_fonts/font = SubResource("SystemFont_ccxhw")
+theme_override_font_sizes/font_size = 30
+text = "Spell words correctly."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+
+[node name="Diff" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+context_menu_enabled = true
+
+[node name="Spacer4" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+
+[node name="Editor" type="LineEdit" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Spell Word"
+alignment = 1
+
+[node name="Spacer2" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+
+[node name="New Word" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "New Word"
+
+[node name="Spacer3" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+
+[node name="Speak" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Speak Word"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Slow" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Slow"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Fast" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Fast"
+
+[node name="Reset" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Reset Score
+"
+
+[node name="Spacer5" type="Control" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 30)
+layout_mode = 2
+
+[node name="Pause" type="Button" parent="CanvasLayer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Pause Game"
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="text_submitted" from="CanvasLayer/VBoxContainer/Editor" to="." method="_on_editor_text_submitted"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/New Word" to="." method="_on_new_word_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Speak" to="." method="_on_speak_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Slow" to="." method="_on_slow_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/Fast" to="." method="_on_fast_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Pause" to="." method="_on_pause_pressed"]
